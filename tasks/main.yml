@@ -1,0 +1,33 @@
+---
+# tasks file for ajsalminen.ansible_pull
+- name: Install ansible-pull shell script.
+  template:
+    src: ansible_pull.sh.j2
+    dest: /usr/local/sbin/ansible_pull.sh
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Create local checkout directory.
+  file:
+    path: "{{ ansible_pull_checkout_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0751
+
+- name: Copy inventory.
+  copy:
+    src: "{{ ansible_pull_inventory_source }}"
+    dest: "{{ ansible_pull_inventory_location }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install ansible-pull cronjob.
+  cron:
+    name: "ansible_pull"
+    minute: "{{ ansible_pull_cron_minute }}"
+    user: root
+    job: /usr/local/sbin/ansible_pull.sh
+    cron_file: ansible_pull

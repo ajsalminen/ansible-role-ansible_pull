@@ -1,0 +1,16 @@
+#!/bin/bash
+ansible_pull_checkout={{ ansible_pull_checkout }}
+ansible_pull_checkout_dir={{ ansible_pull_checkout_dir }}
+ansible_pull_opts={{ ansible_pull_opts }}
+ansible_pull_inventory_location={{ ansible_pull_inventory_location }}
+ansible_pull_repo={{ ansible_pull_repo }}
+ansible_pull_log={{ ansible_pull_log }}
+ansible_install_dir={{ ansible_install_dir }}
+ansible_pull_run_from_checkout="{{ ansible_pull_run_from_checkout }}"
+# The env-setup script requires bash.
+if [ -n "$ansible_pull_run_from_checkout" ]; then
+. $ansible_install_dir/hacking/env-setup
+fi
+
+$ansible_install_dir/bin/ansible-pull $ansible_pull_opts -C $ansible_pull_checkout -d $ansible_pull_dir \
+ -i $ansible_pull_inventory_location -U $ansible_pull_repo >> $ansible_pull_log 2>&1
