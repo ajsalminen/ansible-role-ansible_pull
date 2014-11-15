@@ -1,4 +1,6 @@
 #!/bin/bash
+# this may be needed for cron.d.
+PATH=$PATH:/sbin:/usr/sbin
 ansible_pull_checkout={{ ansible_pull_checkout }}
 ansible_pull_checkout_dir={{ ansible_pull_checkout_dir }}
 ansible_pull_opts={{ ansible_pull_opts }}
@@ -13,5 +15,5 @@ if [ -n "$ansible_pull_run_from_checkout" ]; then
 . $ansible_install_dir/hacking/env-setup
 fi
 
-$ansible_install_dir/bin/ansible-pull $ansible_pull_opts -C $ansible_pull_checkout -d $ansible_pull_dir \
+$ansible_install_dir/bin/ansible-pull $ansible_pull_opts -C $ansible_pull_checkout -d $ansible_pull_checkout_dir \
  -i $ansible_pull_inventory_location -U $ansible_pull_repo $ansible_pull_playbook >> $ansible_pull_log 2>&1
