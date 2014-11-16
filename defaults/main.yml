@@ -4,7 +4,7 @@ ansible_pull_checkout: master
 ansible_pull_checkout_dir: /var/lib/ansible/local
 ansible_pull_opts: -o
 ansible_pull_inventory_source: "{{ inventory_dir }}/{{ inventory_file }}"
-ansible_pull_inventory_location: /etc/ansible/hosts
+ansible_pull_inventory_location: /etc/ansible/production
 ansible_pull_log: /var/log/ansible-pull.log
 ansible_pull_cron_minute: "*/5"
 ansible_pull_run_from_checkout: True
