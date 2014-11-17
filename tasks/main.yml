@@ -16,6 +16,13 @@
     group: root
     mode: 0751
 
+- name: Check out repo.
+  git:
+    repo: "{{ ansible_pull_repo }}"
+    dest: "{{ ansible_pull_checkout_dir }}"
+    version: "{{ ansible_pull_checkout }}"
+
+
 - name: Copy inventory.
   copy:
     src: "{{ ansible_pull_inventory_source }}"

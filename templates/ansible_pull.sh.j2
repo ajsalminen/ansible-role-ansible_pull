@@ -12,7 +12,7 @@ ansible_pull_run_from_checkout="{{ ansible_pull_run_from_checkout }}"
 ansible_pull_playbook={{ ansible_pull_playbook }}
 # The env-setup script requires bash.
 if [ -n "$ansible_pull_run_from_checkout" ]; then
-. $ansible_install_dir/hacking/env-setup
+. $ansible_install_dir/hacking/env-setup > /dev/null 2>&1
 fi
 
 $ansible_install_dir/bin/ansible-pull $ansible_pull_opts -C $ansible_pull_checkout -d $ansible_pull_checkout_dir \
