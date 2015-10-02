@@ -30,11 +30,3 @@
     owner: root
     group: root
     mode: 0644
-
-- name: Install ansible-pull cronjob.
-  cron:
-    name: "ansible_pull"
-    minute: "{{ ansible_pull_cron_minute }}"
-    user: root
-    job: /usr/local/sbin/ansible_pull.sh
-    cron_file: ansible_pull
