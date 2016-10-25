@@ -21,6 +21,7 @@
     repo: "{{ ansible_pull_repo }}"
     dest: "{{ ansible_pull_checkout_dir }}"
     version: "{{ ansible_pull_checkout }}"
+    force: yes
 
 
 - name: Copy inventory.
