@@ -122,6 +122,14 @@ dependencies:
       - name: ansible_pull
         file: ansible_pull
         minute: "{{ ansible_pull_cron_minute }}"
-        user: root
+        hour: "{{ ansible_pull_cron_hour }}"
+        user: "{{ ansible_pull_cron_user }}"
         job:
           -  /usr/local/sbin/ansible_pull.sh
+      - name: ansible_pull_clean
+        file: ansible_pull_clean
+        minute: "{{ ansible_pull_clean_cron_minute }}"
+        hour: "{{ ansible_pull_clean_cron_hour }}"
+        user: "{{ ansible_pull_cron_user }}"
+        job:
+          - "if [ -f /var/lock/ansible_pull ]; then rm -f /var/lock/ansible_pull 2> /dev/null ||echo 'Could not remove flock file' >> /var/log/ansible-pull.log; fi"
