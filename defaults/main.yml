@@ -14,3 +14,4 @@ ansible_pull_playbook: site.yml
 ansible_pull_clean_cron_hour: "02"
 ansible_pull_clean_cron_minute: "05"
 ansible_pull_cron_user: "root"
+ansible_pull_repos_to_update: []
