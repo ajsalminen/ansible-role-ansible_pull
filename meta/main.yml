@@ -117,19 +117,11 @@ galaxy_info:
   #- system
   #- web
 dependencies:
-  - role: ajsalminen.cron_jobs
-    cron_job_list:
+  - role: libraries-fi.systemd_timer
+    systemd_timer_jobs:
       - name: ansible_pull
-        file: ansible_pull
-        minute: "{{ ansible_pull_cron_minute }}"
-        hour: "{{ ansible_pull_cron_hour }}"
-        user: "{{ ansible_pull_cron_user }}"
-        job:
-          -  /usr/local/sbin/ansible_pull.sh
-      - name: ansible_pull_clean
-        file: ansible_pull_clean
-        minute: "{{ ansible_pull_clean_cron_minute }}"
-        hour: "{{ ansible_pull_clean_cron_hour }}"
-        user: "{{ ansible_pull_cron_user }}"
-        job:
-          - "if [ -f /var/lock/ansible_pull ]; then rm -f /var/lock/ansible_pull 2> /dev/null ||echo 'Could not remove flock file' >> /var/log/ansible-pull.log; fi"
+        description: "Ansible pull"
+        on_calendar: "*-*-* {{ ansible_pull_hour }}:00/{{ ansible_pull_minutes_interval }}:00"
+        user: "{{ ansible_pull_user }}"
+        exec_start: /usr/local/sbin/ansible_pull.sh
+    tags: systemd_timer
