@@ -7,11 +7,9 @@ ansible_pull_opts: -o
 ansible_pull_inventory_source: "{{ inventory_dir }}/{{ inventory_file|basename }}"
 ansible_pull_inventory_location: /etc/ansible/production
 ansible_pull_log: /var/log/ansible-pull.log
-ansible_pull_cron_hour: "08-23"
-ansible_pull_cron_minute: "*/15"
+ansible_pull_hour: "08..23"
+ansible_pull_minutes_interval: "15"
 ansible_pull_run_from_checkout: True
 ansible_pull_playbook: site.yml
-ansible_pull_clean_cron_hour: "02"
-ansible_pull_clean_cron_minute: "05"
-ansible_pull_cron_user: "root"
+ansible_pull_user: "root"
 ansible_pull_repos_to_update: []
