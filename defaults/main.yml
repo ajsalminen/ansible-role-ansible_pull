@@ -13,3 +13,4 @@ ansible_pull_run_from_checkout: True
 ansible_pull_playbook: site.yml
 ansible_pull_user: "root"
 ansible_pull_repos_to_update: []
+ansible_pull_vault_password_file: "{{ ansible_pull_checkout_dir }}/.local/vault_password"
